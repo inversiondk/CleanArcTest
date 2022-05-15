@@ -32,6 +32,7 @@ namespace CleanArcTest.Application.Registrations.Queries
         {
             // Using EF queries (without repository pattern) with projection via AutoMapper
             return await _context.Registrations
+                .AsNoTracking()
                 .Where(i => i.TrademarkId == request.TrademarkId)
                 .ProjectTo<RegistrationDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
