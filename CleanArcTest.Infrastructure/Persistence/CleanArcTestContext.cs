@@ -75,6 +75,7 @@ namespace CleanArcTest.Infrastructure.Persistence
                 foreach (var domainEvent in events)
                 {
                     // Publish domain events using e.g. Mediatr, MassTransit etc.
+                    domainEvent.HasBeenPublished = true;
                     Console.WriteLine("Publishing domain event: " + domainEvent.GetType().Name);
                     //await _mediator.Publish(domainEvent).ConfigureAwait(false);
                 }
