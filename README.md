@@ -50,3 +50,7 @@ Endvidere har MediatR en indbygget behavior pipeline der gør det nemt at implem
   Omvendt er det super nemt at implementere domain events samt håndtere nem interface segregation til ting som f.eks. soft deletes, auditable entities osv. Her vil man blot kigge på om ændrede entiteter i SaveChanges() implementerer et eller flere interfaces - og så tilpasse sine entiteter tilsvarende inden save. 
   
   Dermed udestår spørgsmål stadig: Med de tradeoffs det giver, er det så dét værd at implementere 2 forskellige data providers separeret via query og command repositories? Det kommer nok an på løsningen. Simplere løsninger med få udviklere vil nok få større glæde af at have datalogik direkte i query handlers (om ikke andet læsningerne i hvert fald). For store løsninger er der et risk i at det nemt bliver det vilde vesten. Det kræver om ikke andet diciplin. 
+  
+  ## TODOS
+  - Implementering af unit og integrations tests (evt. med EF in-memory provider)
+  - Tage stilling til om det løst koblede setup med MediatR bliver meget mere komplekst ved at splitte det ud i bounded contexts
