@@ -39,7 +39,7 @@ I forbindelse med at skabe en løst koblet løsning (samt i forberedelse til evt
 
 
 ## MediatR
-I løsningen er pt. benyttet et mediator pattern implementeret igennem MediatR-pakken. Dette skaber en meget løs kobling i systemet - ligesom det passer perfekt ind i et CQRS-light / Clean Architecture setup. 
+I løsningen er pt. benyttet et mediator pattern implementeret igennem MediatR-pakken. Dette skaber en meget løs kobling i systemet - ligesom det passer perfekt ind i et CQRS-light / Clean Architecture setup. Ud af æsken for man også separation of concerns forærende. 
 Endvidere har MediatR en indbygget behavior pipeline der gør det nemt at implementere performance-monitoring på enkelte requests, fluent validation etc.
   Den løse kobling kommer dog på bekostning af f.eks. debugging. Fordi der ikke er nogen direkte binding - men alt går igennem mediatoren - er man nødt til at navigere vha. "Go to implementation", "Find usages" samt kendt navne-konvention. 
   Dette virker som et let tradeoff - men bør nok overvejes i forhold til løsninger med MANGE commands og queries. 
@@ -48,3 +48,5 @@ Endvidere har MediatR en indbygget behavior pipeline der gør det nemt at implem
   Jeg er tiltalt af hastigheden og de rå SQL ved Dapper. Udfordringen er dog at det netop er et mikro-ORM - og dermed skal man håndbære en del andre ting selv. 
   I den anden grøft er EF en tung dame at danse med (dog er det blevet MEGET bedre med omskrivningen til EF Core). Her skal man være meget obs på sine executions, optimering af queries etc. ligesom der er et uundgåeligt performance overhead til pipeline, mapping etc. 
   Omvendt er det super nemt at implementere domain events samt håndtere nem interface segregation til ting som f.eks. soft deletes, auditable entities osv. Her vil man blot kigge på om ændrede entiteter i SaveChanges() implementerer et eller flere interfaces - og så tilpasse sine entiteter tilsvarende inden save. 
+  
+  Dermed udestår spørgsmål stadig: Med de tradeoffs det giver, er det så dét værd at implementere 2 forskellige data providers separeret via query og command repositories? Det kommer nok an på løsningen. Simplere løsninger med få udviklere vil nok få større glæde af at have datalogik direkte i query handlers (om ikke andet læsningerne i hvert fald). For store løsninger er der et risk i at det nemt bliver det vilde vesten. Det kræver om ikke andet diciplin. 
